@@ -1,0 +1,32 @@
+version: "3"
+services:
+
+  frontend:
+    image: smart-campus-frontend
+    ports:
+      - 80:3000
+
+
+  backend:
+    image: smart-campus-backend
+    environment:
+      - DATABASE_PASSWORD=${DB_PASSWORD}
+    links: 
+      - database:mysql
+
+  listener:
+    image: smart-campus-listener
+    environment:
+      - TTN_APPID=7895476285
+      - TTN_ACCESSKEY=${TTN_ACCESSKEY}
+      - API_URL=http://backend/api/measurements
+
+  database:
+    image: mariadb
+    environment:
+     - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+     - database-data:/var/lib/mysql
+
+volumes:
+  database-data:
