@@ -6,7 +6,6 @@ services:
     ports:
       - 80:5000
 
-
   backend:
     image: projectwerk2/backend
     environment:
@@ -22,33 +21,6 @@ services:
       - DB_DATABASE=${DB_DATABASE}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
-
-      - BROADCAST_DRIVER=${BROADCAST_DRIVER}
-      - CACHE_DRIVER=${CACHE_DRIVER}
-      - SESSION_DRIVER=${SESSION_DRIVER}
-      - SESSION_LIFETIME=${SESSION_LIFETIME}
-      - QUEUE_DRIVER=${QUEUE_DRIVER}
-
-      - REDIS_HOST=${REDIS_HOST}
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
-      - REDIS_PORT=${REDIS_PORT}
-
-      - MAIL_DRIVER=${MAIL_DRIVER}
-      - MAIL_HOST=${MAIL_HOST}
-      - MAIL_PORT=${MAIL_PORT}
-      - MAIL_USERNAME=${MAIL_USERNAME}
-      - MAIL_PASSWORD=${MAIL_PASSWORD}
-      - MAIL_ENCRYPTION=${MAIL_ENCRYPTION}
-
-      - PUSHER_APP_ID=${PUSHER_APP_ID}
-      - PUSHER_APP_KEY=${PUSHER_APP_KEY}
-      - PUSHER_APP_SECRET=${PUSHER_APP_SECRET}
-      - PUSHER_APP_CLUSTER=${PUSHER_APP_CLUSTER}
-
-      - MIX_PUSHER_APP_KEY=${MIX_PUSHER_APP_KEY}
-      - MIX_PUSHER_APP_CLUSTER=${MIX_PUSHER_APP_CLUSTER}
-    links: 
-      - database:mysql
     depends_on: 
       - migration
       - database
@@ -58,11 +30,10 @@ services:
     environment:
      - TTN_APPID=${TTN_APPID}
      - TTN_ACCESSKEY=${TTN_ACCESSKEY}
-     - HTTP_HOST=${HTTP_HOST}
-     - HTTP_PORT=${HTTP_PORT}
-     - HTTP_PATH=${HTTP_PATH}
-     - HTTP_HTTP=${HTTP_HTTP}
-
+     - HTTP_HOST=backend
+     - HTTP_PORT=8181
+     - HTTP_PATH=/api/listener/
+     - HTTP_HTTP=http
 
   database:
     image: mariadb
@@ -83,8 +54,6 @@ services:
       - APP_DEBUG=${APP_DEBUG}
       - APP_URL=${APP_URL}
 
-      - LOG_CHANNEL=${LOG_CHANNEL}
-
       - DB_HOST=database
       - DB_DATABASE=${DB_DATABASE}
       - DB_USERNAME=${DB_USERNAME}
@@ -93,7 +62,6 @@ services:
     command: /bin/bash -c "sleep 1; php artisan migrate & php artisan db:seed"
     depends_on:
       - database
-
 
 volumes:
   database-data:
