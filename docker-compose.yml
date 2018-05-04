@@ -5,6 +5,7 @@ services:
     image: projectwerk2/frontend
     ports:
       - 80:5000
+    restart: always
 
   backend:
     image: projectwerk2/backend
@@ -24,6 +25,7 @@ services:
     depends_on: 
       - migration
       - database
+    restart: always
 
   listener:
     image: projectwerk2/listener
@@ -34,6 +36,7 @@ services:
      - HTTP_PORT=8181
      - HTTP_PATH=/api/listener/
      - HTTP_HTTP=http
+    restart: always
 
   database:
     image: mariadb
@@ -44,6 +47,7 @@ services:
      - MYSQL_PASSWORD=${DB_PASSWORD}
     volumes:
      - database-data:/var/lib/mysql
+    restart: always
 
   migration:
     image: projectwerk2/backend
@@ -59,7 +63,7 @@ services:
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
 
-    command: /bin/bash -c "sleep 1; php artisan migrate & php artisan db:seed"
+    command: /bin/bash -c "sleep 1; php artisan migrate:refresh --seed"
     depends_on:
       - database
 
