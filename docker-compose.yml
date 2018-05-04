@@ -10,18 +10,13 @@ services:
   backend:
     image: projectwerk2/backend
     environment:
-      - APP_NAME=${APP_NAME}
-      - APP_ENV=${APP_ENV}
+      - APP_ENV=production
       - APP_KEY=${APP_KEY}
-      - APP_DEBUG=${APP_DEBUG}
-      - APP_URL=${APP_URL}
-
-      - LOG_CHANNEL=${LOG_CHANNEL}
 
       - DB_HOST=database
-      - DB_DATABASE=${DB_DATABASE}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=smartcampus
+      - DB_USERNAME=smartcampus
+      - DB_PASSWORD=smartcampus
     depends_on: 
       - database
     restart: always
@@ -40,10 +35,10 @@ services:
   database:
     image: mariadb
     environment:
-     - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
-     - MYSQL_DATABASE=${DB_DATABASE}
-     - MYSQL_USER=${DB_USERNAME}
-     - MYSQL_PASSWORD=${DB_PASSWORD}
+     - MYSQL_ROOT_PASSWORD=smartcampus
+     - MYSQL_DATABASE=smartcampus
+     - MYSQL_USER=smartcampus
+     - MYSQL_PASSWORD=smartcampus
     volumes:
      - database-data:/var/lib/mysql
     restart: always

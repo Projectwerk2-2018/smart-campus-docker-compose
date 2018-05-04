@@ -43,5 +43,6 @@ When starting the services with `docker-compose up`, the updates will be applied
 
 Use the `.env` file to set the secrets and passwords.
 
-* `DB_PASSWORD` could be a random password
+* `APP_KEY` Application secret key for Laravel
+* `TTN_APPID` The application ID of the Things Network Application
 * `TTN_ACCESSKEY` can be found on the application page in the TTN dashboard
