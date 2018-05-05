@@ -1,0 +1,11 @@
+version: "3"
+services:
+
+  frontend:
+    environment:
+     - REACT_APP_API_URL=backend.vives-smart-campus.be
+     - VIRTUAL_HOST=vives-smart-campus.be
+
+  backend:
+    environment:
+      - VIRTUAL_HOST=backend.vives-smart-campus.be
