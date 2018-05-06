@@ -4,7 +4,7 @@ services:
   frontend:
     image: projectwerk2/frontend:develop
     ports:
-      - 80:5000
+      - 5000
     restart: always
     environment:
      - REACT_APP_API_URL=http://192.168.99.100:8181
@@ -12,7 +12,7 @@ services:
   backend:
     image: projectwerk2/backend
     ports:
-      - 8181:8181
+      - 8181
     environment:
       - APP_ENV=production
       - APP_KEY=${APP_KEY}

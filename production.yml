@@ -5,7 +5,19 @@ services:
     environment:
      - REACT_APP_API_URL=backend.vives-smart-campus.be
      - VIRTUAL_HOST=vives-smart-campus.be
+     - VIRTUAL_PORT=5000
+     - LETSENCRYPT_HOST=vives-smart-campus.be
+     - LETSENCRYPT_EMAIL=sille.vanlandschoot@vives.be
+
 
   backend:
     environment:
       - VIRTUAL_HOST=backend.vives-smart-campus.be
+      - VIRTUAL_PORT=8181
+      - LETSENCRYPT_HOST=backend.vives-smart-campus.be
+      - LETSENCRYPT_EMAIL=sille.vanlandschoot@vives.be
+
+networks:
+  default:
+    external: 
+      name: nginx-proxy 
